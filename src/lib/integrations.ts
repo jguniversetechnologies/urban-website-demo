@@ -59,19 +59,19 @@ export const analyticsConfig = {
   measurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''
 };
 
+const integrationConfigs = {
+  googleMaps: googleMapsConfig,
+  sms: smsConfig,
+  payment: paymentConfig,
+  firebase: firebaseConfig,
+  storage: storageConfig,
+  email: emailConfig,
+  analytics: analyticsConfig
+};
+
 // Helper function to check if integration is configured
 export function isIntegrationConfigured(integration: keyof typeof integrationConfigs): boolean {
-  const configs: { [key: string]: any } = {
-    googleMaps: googleMapsConfig,
-    sms: smsConfig,
-    payment: paymentConfig,
-    firebase: firebaseConfig,
-    storage: storageConfig,
-    email: emailConfig,
-    analytics: analyticsConfig
-  };
-
-  const config = configs[integration];
+  const config = integrationConfigs[integration];
   if (!config) return false;
 
   // Check if any meaningful config value exists
